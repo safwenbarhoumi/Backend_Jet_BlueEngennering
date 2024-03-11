@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const alarmeSchema = new mongoose.Schema({
-
-  alarmestate: {
+  state: {
     type: String,
   },
   farm: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Farm",
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Farm",
+  },
 });
 module.exports = mongoose.model("Alarm", alarmeSchema);

@@ -7,13 +7,17 @@ require("dotenv").config();
 
 exports.signup = async (req, res) => {
   try {
-    const { zones, wells, pumps, culture, localisation_farm, alarme, steg } =
+    const { zones, wells, pumps, culture, localisation_farm, alarm, steg } =
       req.body;
+
+    zones.forEach((zone) => {
+      console.log(zone.sensors);
+    });
 
     const newFarm = new Farm({
       localisation_farm: localisation_farm,
       culture: culture,
-      alarme: alarme,
+      alarm: alarm,
       wells: wells,
       pumps: pumps,
       zones: zones.map((zone) => ({
@@ -24,13 +28,14 @@ exports.signup = async (req, res) => {
       steg: steg,
     });
 
+    console.log(zones.sensors);
     const savedFarm = await newFarm.save();
 
     const newUser = new User({
       phone: req.body.phone,
       password: req.body.password,
       name: req.body.name,
-      Address: req.body.Address,
+      address: req.body.address,
       farm: savedFarm._id,
     });
 

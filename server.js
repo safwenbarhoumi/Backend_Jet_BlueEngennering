@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const cookieSession = require("cookie-session");
-require('dotenv').config();
+require("dotenv").config();
 
 const { connectToMongoDB } = require("./Database/mongooseConnection");
 
@@ -20,12 +20,7 @@ const wellsRoute = require("./routes/wells.route");
 const valvesRoute = require("./routes/valves.route");
 const farmRoute = require("./routes/farm.route");
 const authRoutes = require("./routes/auth.routes");
-
-
-
-
-
-
+const stegRoutes = require("./routes/steg.route");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -44,7 +39,6 @@ app.use(
   })
 );
 
-
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
@@ -53,39 +47,27 @@ app.get("/", (req, res) => {
 
 connectToMongoDB();
 
-
-  app.get("/", (req, res) => {
-    res.json({ message: "Welcome to ERWINI application." });
-  });
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-  });
-
-
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to ERWINI application." });
+});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
 
 //agriculteur middelwares
-app.use("/api", authRoutes)
+app.use("/api", authRoutes);
 
-// app.use("/api", authJwt)
-
-app.use("/api",userRoute)
-app.use("/api",notificationRoute)
-app.use("/api",alarmRoute)
-app.use("/api",sensorsRoute)
-app.use("/api",pumpsRoute)
-app.use("/api",agriculturalZonesRoute)
-app.use("/api",wellsRoute)
-app.use("/api",valvesRoute)
-app.use("/api",farmRoute)
-
+app.use("/api", authJwt);
+app.use("/api", userRoute);
+app.use("/api", notificationRoute);
+app.use("/api", alarmRoute);
+app.use("/api", sensorsRoute);
+app.use("/api", pumpsRoute);
+app.use("/api", agriculturalZonesRoute);
+app.use("/api", wellsRoute);
+app.use("/api", valvesRoute);
+app.use("/api", farmRoute);
+app.use("/api", stegRoutes);
 
 //admin middelwares
-
-
-
-
-
-
-
-

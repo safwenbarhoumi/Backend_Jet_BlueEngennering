@@ -8,12 +8,20 @@ const timeRangeSchema = new mongoose.Schema({
 const wellscheduleschema = new mongoose.Schema({
   wellId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Well', 
+    ref: "Well",
     required: true,
   },
   day: {
     type: String,
-    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    enum: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
     required: true,
   },
   timeRanges: [timeRangeSchema],

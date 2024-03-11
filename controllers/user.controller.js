@@ -12,7 +12,7 @@ exports.getProfile = async (req, res) => {
 
     const profile = {
       name: user.name,
-      address: user.Address,
+      address: user.address,
       phone: user.phone,
     };
 
@@ -31,21 +31,15 @@ exports.updateProfile = async (req, res) => {
       return res.status(404).send({ message: "User not found" });
     }
 
-    if (req.name) {
-      user.name = name;
-    }
-    if (req.address) {
-      user.Address = address;
-    }
-    if (req.phone) {
-      user.phone = phone;
-    }
+    user.name = req.body.name;
+    user.address = req.body.address;
+    user.phone = req.body.phone;
 
     await user.save();
 
     const updatedProfile = {
       name: user.name,
-      address: user.Address,
+      address: user.address,
       phone: user.phone,
     };
 

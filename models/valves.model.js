@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 
 const valvesSchema = new mongoose.Schema({
   state: {
-    type: String,
+    type: Number,
   },
   electricityState: {
-    type: String,
+    type: Number,
   },
   hardwareState: {
-    type: String,
+    type: Number,
   },
   batteryLevel: {
     type: Number,

@@ -1,9 +1,8 @@
 const controller = require("../controllers/user.controller");
 const { authJWT } = require("../middlewares");
-const userRoute = require('express').Router();
+const userRoute = require("express").Router();
 
+userRoute.get("/profile", controller.getProfile);
+userRoute.post("/profile", controller.updateProfile);
 
-userRoute.get("api/getProfile",controller.getProfile)
-userRoute.put("/api/updateProfile",controller.updateProfile)
-
-module.exports=userRoute;
+module.exports = userRoute;
