@@ -3,7 +3,7 @@ const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
 
-checkDuplicatedphone = async (req, res, next) => {
+/* checkDuplicatedphone = async (req, res, next) => {
   phone = req.body.phone;
   try {
     const user = await findOne({ phone: phone });
@@ -19,6 +19,23 @@ checkDuplicatedphone = async (req, res, next) => {
   }
 
   next();
+}; */
+const checkDuplicatedphone = async (req, res, next) => {
+  try {
+    const { phone } = req.body;
+    // Check if the phone number already exists in the database
+    const existingUser = await User.findOne({ phone });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "Phone number already registered" });
+    }
+    // If the phone number is unique, continue with the registration process
+    next();
+  } catch (error) {
+    console.error("Error in checkDuplicatePhone middleware:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 // checkRolesExisted = (req, res, next) => {

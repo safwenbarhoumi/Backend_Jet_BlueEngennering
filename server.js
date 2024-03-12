@@ -21,6 +21,7 @@ const valvesRoute = require("./routes/valves.route");
 const farmRoute = require("./routes/farm.route");
 const authRoutes = require("./routes/auth.routes");
 const stegRoutes = require("./routes/steg.route");
+const notificationRoutes = require("./routes/notification.route");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -69,5 +70,6 @@ app.use("/api", wellsRoute);
 app.use("/api", valvesRoute);
 app.use("/api", farmRoute);
 app.use("/api", stegRoutes);
+app.use("/api", notificationRoutes);
 
 //admin middelwares

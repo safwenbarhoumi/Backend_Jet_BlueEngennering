@@ -1,6 +1,7 @@
 const Steg = require("../models/steg.model");
 const PumpSchedule = require("../models/pumpSchedule.model");
 const User = require("../models/user.model");
+const Notification = require("../models/notification.model");
 
 const controlledBySteg = async (req, res) => {
   try {
@@ -32,11 +33,17 @@ const controlledBySteg = async (req, res) => {
       user.farm[0].steg[0].isAccident = 1;
       await user.farm[0].save();
 
+      const currentDate = new Date().toISOString();
+      const newNotification = new Notification({
+        title: `The Steg if off : All machines are desactivated`,
+        date: currentDate,
+      });
+      const savedNotification = await newNotification.save();
+
       console.log("Accident: All machines deactivated");
     }
     if (steg[0].active == 1 && user.farm[0].steg[0].isAccident == 1) {
       console.log("active and accidented !!!");
-      console.log("updating in the database!!!!!!!");
       user.farm[0].steg[0].isAccident = 0;
       await user.farm[0].save();
 
@@ -45,6 +52,7 @@ const controlledBySteg = async (req, res) => {
           user.farm[0].pumps.pumpschedule,
           steg[0].automatic_mode
         ); */
+
         const pumpDelay = await calculateDelay(5000, steg[0].automatic_mode);
         console.log("automatic mode is on");
         console.log("Pump delay is:", pumpDelay);

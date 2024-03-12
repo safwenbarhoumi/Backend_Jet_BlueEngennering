@@ -43,7 +43,7 @@ exports.signup = async (req, res) => {
 
     // Load the populated user with the farm data
     const populatedUser = await User.findById(savedUser._id).populate({
-      path: "farm",
+      path: "Farm",
       options: { strictPopulate: false },
     });
 

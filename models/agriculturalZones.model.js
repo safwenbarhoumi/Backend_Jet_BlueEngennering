@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-// const valvesSchema = require("./valves.model");
-const Sensor = require("./valves.model");
-const Valve = require("./sensors.model");
+const Sensor = require("./sensors.model");
+const Valve = require("./valves.model");
 
 const zoneSchema = new mongoose.Schema({
   localisation_zone: {
@@ -10,18 +9,6 @@ const zoneSchema = new mongoose.Schema({
   },
   sensors: [Sensor.schema],
   valves: [Valve.schema],
-  /*   sensors: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Sensor",
-    },
-  ],
-  valves: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Valve",
-    },
-  ], */
 });
 
 module.exports = mongoose.model("Zone", zoneSchema);

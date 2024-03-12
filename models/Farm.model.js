@@ -16,30 +16,6 @@ const farmSchema = new mongoose.Schema({
   pumps: [Pumps.schema],
   zones: [Zone.schema],
   steg: [Steg.schema],
-  /*   wells:[
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Well",
-    },
-  ],
-  pumps: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Pump",
-    },
-  ],
-  zones: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Zone",
-    },
-  ],
-  steg: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Steg",
-    },
-  ], */
 });
 
 const Farm = mongoose.model("Farm", farmSchema);
